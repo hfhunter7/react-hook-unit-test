@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import useFetchPost from './components/useFetchPost';
 
 function App() {
+  const [loading, post, error] = useFetchPost(1)
+  if(loading){
+    return <div>loading...</div>
+  }
+
+  if(error){
+    return <div>Error { error }</div>
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{post.title}</h1>
+      <h1>{post.body}</h1>
     </div>
   );
 }
